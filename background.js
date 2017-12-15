@@ -1,43 +1,44 @@
 
-function show() {
+function show(message) {
   var time = /(..)(:..)/.exec(new Date());     // The prettyprinted time.
   var hour = time[1] % 12 || 12;               // The prettyprinted hour.
   var period = time[1] < 12 ? 'a.m.' : 'p.m.'; // The period of the day.
-  new Notification(hour + time[2] + ' ' + period, {
-    icon: 'icon.png',
-    body: "Don't forget to make your changes..."
+  notification =new Notification(hour + time[2] + ' ' + period, {
+    icon: 'premIcon.png',
+    body:message
   });
-}
-function almostTime() {
-  var time = /(..)(:..)/.exec(new Date());     // The prettyprinted time.
-  var hour = time[1] % 12 || 12;               // The prettyprinted hour.
-  var period = time[1] < 12 ? 'a.m.' : 'p.m.'; // The period of the day.
-  new Notification(hour + time[2] + ' ' + period, {
-    icon: 'icon.png',
-    body: "Time is almost up..."
-  });
+  notification.onclick = function(){
+        window.open('https://fantasy.premierleague.com/');
+        window.focus();
+    };
 }
 
-// Conditionally initialize the options.
+
+// initilize local storage
 if (!localStorage.isInitialized) {
-  localStorage.isActivated = true;   // The display activation.
-  localStorage.frequency = 1;        // The display frequency, in minutes.
-  localStorage.isInitialized = true; // The option initialization.
+  localStorage.isActivated = true;   
+  localStorage.frequency = 1;       
+  localStorage.isInitialized = true; 
 }
 
-// Test for notification support.
+//check time
 if (window.Notification) {
  
     var today = new Date();
     var d=today.getDay();
     var t=today.getHours();
     var m = today.getMinutes();
-
-  if(d== 5 && t<=22   ){ 
-      if (JSON.parse(localStorage.isActivated)) { show(); }
+  //check if day is friday
+  if(d== 5 && t<=19 && m >38 && m<45  ){ 
+      if (JSON.parse(localStorage.isActivated)) { 
+        
+        show("Time is almost up...");
+       }
    } 
-  else if(d== 5 && t<=22  && m>=38 &&m<45  ){
-     if (JSON.parse(localStorage.isActivated)) { almostTime(); }
+  else if(d== 5 && t<19 ){
+     if (JSON.parse(localStorage.isActivated)) { 
+       show("Don't forget to make your changes...");
+      }
   }
 } 
 

@@ -7,11 +7,11 @@
   "permissions": [
     "notifications"
   ],
-  "icons": { "16": "icon.png",
-           "48": "icon.png",
-          "128": "icon.png" },
+  "icons": { "16": "premIcon.png",
+           "48": "premIcon.png",
+          "128": "premIcon.png" },
  "browser_action":{
-        "default_icon":"icon.png"
+        "default_icon":"premIcon.png"
     },
   "background": { "scripts": ["background.js"] },
   "manifest_version": 2,

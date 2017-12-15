@@ -21,25 +21,33 @@ if (!localStorage.isInitialized) {
   localStorage.isInitialized = true; 
 }
 
+//chrome.alarms.onAlarm.addListener()   investigate alarms
+
+
 //check time
-if (window.Notification) {
- 
-    var today = new Date();
-    var d=today.getDay();
-    var t=today.getHours();
-    var m = today.getMinutes();
-  //check if day is friday
-  if(d== 5 && t<=19 && m >38 && m<45  ){ 
+function checkTime(){
+  if (window.Notification) {
+  
+      var today = new Date();
+      var d=today.getDay();
+      var t=today.getHours();
+      var m = today.getMinutes();
+    //check if day is friday
+    if(d== 5 && t<19 && m >38 && m<45  ){ 
+        if (JSON.parse(localStorage.isActivated)) { 
+          
+          show("Time is almost up...");
+        }
+    } 
+    else if(d== 5 && t<20 ){
       if (JSON.parse(localStorage.isActivated)) { 
-        
-        show("Time is almost up...");
-       }
-   } 
-  else if(d== 5 && t<19 ){
-     if (JSON.parse(localStorage.isActivated)) { 
-       show("Don't forget to make your changes...");
-      }
-  }
-} 
+        show("Don't forget to make your changes...");
+        }
+    }
+  } 
+}
+
+
+setInterval(checkTime(), 60000);
 
 

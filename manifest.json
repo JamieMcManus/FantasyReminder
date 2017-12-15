@@ -5,7 +5,7 @@
     "This extension will remind you to set your fantasy team",
  
   "permissions": [
-    "notifications"
+    "notifications","alarms"
   ],
   "icons": { "16": "premIcon.png",
            "48": "premIcon.png",
